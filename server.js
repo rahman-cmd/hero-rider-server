@@ -189,5 +189,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-   console.log(`Hero Rider's Server is listening at http://localhost:${port}`);
+   console.log(`Hero Rider's Server port http://localhost:${port}`);
 });

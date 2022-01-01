@@ -185,7 +185,7 @@ const main = async () => {
 main().catch((err) => console.dir);
 
 app.get('/', (req, res) => {
-   res.send('Hero Rider Server 🏍');
+   res.send('Hero Rider Server');
 });
 
 app.listen(port, () => {

@@ -29,7 +29,7 @@ const client = new MongoClient(uri, {
 
 const main = async () => {
    try {
-      // Connect the client to the server
+      // Connect the client to the server       
       await client.connect();
       console.log('Connected successfully to Mongo');
 
@@ -39,7 +39,7 @@ const main = async () => {
 
       // APIs
 
-      // save users
+      // save users in database
       app.post('/saveUser', async (req, res) => {
          const { userProfileImage, userNidImage, userLicenseImage } = req.files;
          const otherUserData = req.body;

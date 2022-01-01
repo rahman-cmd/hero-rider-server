@@ -7,7 +7,7 @@ const fileUpload = require('express-fileupload');
 const admin = require('firebase-admin');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000; // important for deploy
 
 var serviceAccount = require('./hero-rider-app-firebase-adminsdk-settings.json');
 
@@ -35,6 +35,7 @@ const main = async () => {
 
       const database = client.db('hero-rider');
       const userCollection = database.collection('users');
+      const packageCollection = database.collection('packages');
 
       // APIs
 
@@ -97,7 +98,10 @@ const main = async () => {
       app.get('/checkAdmin/:email', async (req, res) => {
          const { email } = req.params;
          console.log(email);
-         const result = await userCollection.findOne({ userEmail: email }, { projection: { images: 0 } });
+         const result = await userCollection.findOne(
+            { userEmail: email },
+            { projection: { images: 0 } }
+         );
          res.json(result);
       });
 
@@ -163,6 +167,14 @@ const main = async () => {
             res.json({ message: 'error deleting users' });
          }
       });
+
+      app.get('/packages', async (req, res) => {
+         const cursor = packageCollection.find({});
+         const result = await cursor.toArray();
+
+         res.json(result);
+      });
+
    } catch (err) {
       console.error(err);
    } finally {
